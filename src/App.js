@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import './App.css';
-import { useState } from "react";
+import { MovieList } from './MovieList';
 
 function App() {
-const movies=[{MovieName:"Avatar",Poster:"http://imgs.abduzeedo.com/files/articles/Avatar/4154691413_a695e033a8_o.jpg",rating:7.8,summary:"On the lush alien world of Pandora live the Na'vi, beings who appear primitive but are highly evolved. Because the planet's environment is poisonous, human/Na'vi hybrids, called Avatars, must link to human minds to allow for free movement on Pandora. Jake Sully (Sam Worthington), a paralyzed former Marine, becomes mobile again through one such Avatar and falls in love with a Na'vi woman (Zoe Saldana). As a bond with her grows, he is drawn into a battle for the survival of her world."},
+const Intialmovies=[{MovieName:"Avatar",Poster:"http://imgs.abduzeedo.com/files/articles/Avatar/4154691413_a695e033a8_o.jpg",rating:7.8,summary:"On the lush alien world of Pandora live the Na'vi, beings who appear primitive but are highly evolved. Because the planet's environment is poisonous, human/Na'vi hybrids, called Avatars, must link to human minds to allow for free movement on Pandora. Jake Sully (Sam Worthington), a paralyzed former Marine, becomes mobile again through one such Avatar and falls in love with a Na'vi woman (Zoe Saldana). As a bond with her grows, he is drawn into a battle for the survival of her world."},
 
     {MovieName:"Sivaji",Poster:"https://images.hindustantimes.com/img/2021/06/15/1600x900/Sivaji_The_Boss_1623762218379_1623762234022.jpg",rating:7.5,summary:"Sivaji returns from the US to invest his money here for good causes. But seeing his rising popularity, the politicians cheat him and steal all of his property. Sivaji takes this as a challenge."},
 
@@ -14,69 +15,55 @@ const movies=[{MovieName:"Avatar",Poster:"http://imgs.abduzeedo.com/files/articl
               
   ];
 
+  const [name,setName]=useState("");
+  const [image,setimage]=useState("");
+  const [rating1,setrating]=useState("");
+  const [summary1,setsummary]=useState("");
+  const [movie,setMovies]=useState(Intialmovies);
+
   return (
          <div className="App">
-          <MovieList movies={movies}/>
-         </div>
-        
-        );
+      <div className="movieform">
+     <input value={name} onChange={(ele)=>setName(ele.target.value)} type="text" placeholder="Enter Movie Name"/>
+     <input value={image} onChange={(ele)=>setimage(ele.target.value)} type="text" placeholder="Enter the Movie image url"/>
+     <input value={rating1} onChange={(ele)=>setrating(ele.target.value)}    type="text" placeholder="Enter the Movie Rating"/>
+     <input value={summary1} onChange={(ele)=>setsummary(ele.target.value)}   type="text" placeholder="Enter the Movie Summary"/>
+    
+    <button onClick={()=>{
+      const newMovie={name:name,image:image,rating:rating1,summary:summary1};
+      setMovies([...movie,newMovie]);
+    }}>Add Movies</button>
+    </div>
+    <MovieList movies={movie}/>
+    </div>
+);
 }
 
 export default App;
 
-function Likecounter()
-{  
-  let [like,setLike]=useState(0);
-  let [dislike,setdislike]=useState(0);
-  return(
-   <div className="countercontainer">
-    <button className="like" onClick={()=>{
-      setLike(like+1);
-   }}>👍{like}</button>
+     
+// function AddColor(){
+//    const [color,setcolor]=useState("pink");
+//    const styles={backgroundColor:color};
+//    const [colors,setcolors]=useState(["pink","crimson","teal"]); 
+//   return(
+//     <div>
+//       <input value={color} onChange={(eve)=>setcolor(eve.target.value)} style={styles} placeholder="Enter a color"/>
+//       <button onClick={()=>setcolors([...colors,color])}>Add Color</button>
+//       {colors.map((clr,idx)=><ColorBox key={idx} color={clr}/>
+//       )}
+
+//     </div>
    
+//   );
+// }
 
-   <button className="like" onClick={()=>{
-      setdislike(dislike+1);
-   }}>👎{dislike}</button>
-   
-   </div>
-);
-}      
-
-function MovieList({movies}){
-  console.log(movies);
-  return(
-    <section className="movie-list"> 
-    { movies.map((mv)=><Movie
-                           name={mv.MovieName}
-                           rating={mv.rating}
-                           summary={mv.summary}
-                           pic={mv.Poster} 
-                        />
-                  )
-    }
-  </section>
-  )
-}
+// function ColorBox({color}){
+//    const styles={backgroundColor:color,height:"25px",width:"200px",marginTop:"10px"};
+//    return(<div style={styles}></div>);
+    
+// }
 
 
 
-function Movie({name,rating,summary,pic}) {
-  let [show,setshow]=useState(true);
-  let styles={color:rating<8 ? "red " :"green",fontWeight:"bold"}
-  let displaydescp={display: show? "block" :"none"}
-  return (
-   <div className="movie-container">
-     <img  className="movie-poster" src={pic} alt={name} />
-     <div className="movie-specs">
-     <h1 className="movie-name">{name}</h1>
-     <p className="movierating" style={styles}>⭐{rating}</p>
-     </div>
-     <button onClick={()=>setshow(!show)}>Hide Description</button>
-     <p  style={displaydescp} className="movie-summary">{summary}</p>
-     <Likecounter/>
-   </div>
-   
-  );
-}
-
+ 
