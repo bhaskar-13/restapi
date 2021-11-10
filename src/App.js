@@ -1,6 +1,12 @@
-import { useState } from 'react';
+
 import './App.css';
 import { MovieList } from './MovieList';
+import {AddMovie} from './addmovie';
+import { Switch, Route, Link } from "react-router-dom";
+import {AddColor}  from './addcolor';
+
+
+
 
 function App() {
 const Intialmovies=[{MovieName:"Avatar",Poster:"http://imgs.abduzeedo.com/files/articles/Avatar/4154691413_a695e033a8_o.jpg",rating:7.8,summary:"On the lush alien world of Pandora live the Na'vi, beings who appear primitive but are highly evolved. Because the planet's environment is poisonous, human/Na'vi hybrids, called Avatars, must link to human minds to allow for free movement on Pandora. Jake Sully (Sam Worthington), a paralyzed former Marine, becomes mobile again through one such Avatar and falls in love with a Na'vi woman (Zoe Saldana). As a bond with her grows, he is drawn into a battle for the survival of her world."},
@@ -15,26 +21,44 @@ const Intialmovies=[{MovieName:"Avatar",Poster:"http://imgs.abduzeedo.com/files/
               
   ];
 
-  const [name,setName]=useState("");
-  const [image,setimage]=useState("");
-  const [rating1,setrating]=useState("");
-  const [summary1,setsummary]=useState("");
-  const [movie,setMovies]=useState(Intialmovies);
+  // const [name,setName]=useState("");
+  // const [image,setimage]=useState("");
+  // const [rating1,setrating]=useState("");
+  // const [summary1,setsummary]=useState("");
+  // const [movie,setMovies]=useState(Intialmovies);
 
   return (
          <div className="App">
-      <div className="movieform">
+      {/* <div className="movieform">
      <input value={name} onChange={(ele)=>setName(ele.target.value)} type="text" placeholder="Enter Movie Name"/>
      <input value={image} onChange={(ele)=>setimage(ele.target.value)} type="text" placeholder="Enter the Movie image url"/>
-     <input value={rating1} onChange={(ele)=>setrating(ele.target.value)}    type="text" placeholder="Enter the Movie Rating"/>
+     <input value={rating1} onChange={(ele)=>setrating(ele.target.value)}type="text" placeholder="Enter the Movie Rating"/>
      <input value={summary1} onChange={(ele)=>setsummary(ele.target.value)}   type="text" placeholder="Enter the Movie Summary"/>
     
     <button onClick={()=>{
       const newMovie={name:name,image:image,rating:rating1,summary:summary1};
       setMovies([...movie,newMovie]);
     }}>Add Movies</button>
+    </div> */}
+    <nav>
+    <div className="nav">
+    <Link to="/movies">Movies</Link>
+    <Link to="/addmovies">Add Movies</Link>
+    <Link to="/color">color</Link>
     </div>
-    <MovieList movies={movie}/>
+    </nav>
+    <Switch>
+    <Route path="/movies">
+    <AddMovie  movies={Intialmovies}/>
+    </Route>
+    <Route path="/addmovies">
+    <MovieList movies={Intialmovies}/>
+     </Route>
+     <Route path="/color">
+     < AddColor/>
+    </Route>
+  
+    </Switch>
     </div>
 );
 }
@@ -42,27 +66,6 @@ const Intialmovies=[{MovieName:"Avatar",Poster:"http://imgs.abduzeedo.com/files/
 export default App;
 
      
-// function AddColor(){
-//    const [color,setcolor]=useState("pink");
-//    const styles={backgroundColor:color};
-//    const [colors,setcolors]=useState(["pink","crimson","teal"]); 
-//   return(
-//     <div>
-//       <input value={color} onChange={(eve)=>setcolor(eve.target.value)} style={styles} placeholder="Enter a color"/>
-//       <button onClick={()=>setcolors([...colors,color])}>Add Color</button>
-//       {colors.map((clr,idx)=><ColorBox key={idx} color={clr}/>
-//       )}
-
-//     </div>
-   
-//   );
-// }
-
-// function ColorBox({color}){
-//    const styles={backgroundColor:color,height:"25px",width:"200px",marginTop:"10px"};
-//    return(<div style={styles}></div>);
-    
-// }
 
 
 

@@ -5,7 +5,7 @@ export function Movie({ name, rating, summary, pic }) {
   let styles = { color: rating < 8 ? "red " : "green", fontWeight: "bold" };
   let displaydescp = { display: show ? "block" : "none" };
   return (
-    <div className="movie-container">
+     <div className="movie-container">
       <img className="movie-poster" src={pic} alt={name} />
       <div className="movie-specs">
         <h1 className="movie-name">{name}</h1>
