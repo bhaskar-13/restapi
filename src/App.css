@@ -1,6 +1,4 @@
-/* .App {
-  text-align: center;
-} */
+
 
 .movie-list{
   display:flex;
@@ -11,6 +9,7 @@
 
 .movie-container{
   width: 340px;
+ 
 }
 
 .movie-poster{
@@ -54,7 +53,25 @@ body{
 .nav{
   display: flex;
   gap:10px;
+  font-size: 24px;
+  gap:20px;
+  margin: 20px;
 }
+
+.movieform{
+  margin:20px;
+  height:min-content;
+  display: flex;
+  flex-direction: column;
+  gap:3px
+}
+
+.movie-container1{
+  text-align: center;
+  max-width: 50rem;
+  padding: 20px;
+}
+
 
 
 

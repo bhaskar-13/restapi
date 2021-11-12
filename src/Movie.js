@@ -1,19 +1,40 @@
 import { useState } from "react";
 import { Likecounter } from "./counter";
-export function Movie({ name, rating, summary, pic }) {
+import IconButton from '@mui/material/IconButton';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import { useHistory } from "react-router-dom";
+import InfoIcon from '@mui/icons-material/Info';
+export function Movie({ name, rating, summary, pic ,id,deleteButton,editButton}) {
   let [show, setshow] = useState(true);
+  let history=useHistory();
   let styles = { color: rating < 8 ? "red " : "green", fontWeight: "bold" };
   let displaydescp = { display: show ? "block" : "none" };
   return (
-     <div className="movie-container">
+     <Card  className="movie-container">
       <img className="movie-poster" src={pic} alt={name} />
+      <CardContent>
       <div className="movie-specs">
-        <h1 className="movie-name">{name}</h1>
+        <h1 className="movie-name">{name}
+        <IconButton  onClick={()=>history.push('/movies/' +id)} aria-label="more-info" color="primary">
+        {<InfoIcon/>}
+      </IconButton>
+        <IconButton  onClick={() => setshow(!show)} aria-label="hide-show" color="primary">
+        {show ?<ExpandLessIcon/> :<ExpandMoreIcon/>}
+      </IconButton>
+        </h1>
         <p className="movierating" style={styles}>⭐{rating}</p>
       </div>
-      <button onClick={() => setshow(!show)}>Hide Description</button>
       <p style={displaydescp} className="movie-summary">{summary}</p>
+      <CardActions>
       <Likecounter />
-    </div>
+      {deleteButton}
+      {editButton}
+      </CardActions>
+      </CardContent>
+    </Card>
   );
 }
